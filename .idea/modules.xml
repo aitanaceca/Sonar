@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/19E07.iml" filepath="$PROJECT_DIR$/19E07.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sonar.iml" filepath="$PROJECT_DIR$/Sonar.iml" />
     </modules>
   </component>
 </project>

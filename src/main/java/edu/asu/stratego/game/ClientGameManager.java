@@ -35,12 +35,6 @@ public class ClientGameManager implements Runnable {
 
     private ClientStage stage;
 
-
-
-
-
-
-
     /**
      * Creates a new instance of ClientGameManager.
      *
@@ -111,18 +105,18 @@ public class ClientGameManager implements Runnable {
         });
         try {
             // I/O Streams.
-            toServer = new ObjectOutputStream(ClientSocket.getInstance().getOutputStream());
-            fromServer = new ObjectInputStream(ClientSocket.getInstance().getInputStream());
+            toServer = new ObjectOutputStream(edu.asu.stratego.game.ClientSocket.getInstance().getOutputStream());
+            fromServer = new ObjectInputStream(edu.asu.stratego.game.ClientSocket.getInstance().getInputStream());
 
             // Exchange player information.
-            toServer.writeObject(Game.getPlayer());
-            Game.setOpponent((Player) fromServer.readObject());
+            toServer.writeObject(edu.asu.stratego.game.Game.getPlayer());
+            edu.asu.stratego.game.Game.setOpponent((edu.asu.stratego.game.Player) fromServer.readObject());
 
             // Infer player color from opponent color.
-            if (Game.getOpponent().getColor() == PieceColor.RED)
-                Game.getPlayer().setColor(PieceColor.BLUE);
+            if (edu.asu.stratego.game.Game.getOpponent().getColor() == edu.asu.stratego.game.PieceColor.RED)
+                edu.asu.stratego.game.Game.getPlayer().setColor(edu.asu.stratego.game.PieceColor.BLUE);
             else
-                Game.getPlayer().setColor(PieceColor.RED);
+                edu.asu.stratego.game.Game.getPlayer().setColor(edu.asu.stratego.game.PieceColor.RED);
         } catch (IOException | ClassNotFoundException e) {
             LOGGER.log(Level.WARNING, "Opponent not found", e);
         }
@@ -142,24 +136,24 @@ public class ClientGameManager implements Runnable {
             try {
                 // Wait for the player to set up their pieces.
                 setupPieces.wait();
-                Game.setStatus(GameStatus.WAITING_OPP);
+                edu.asu.stratego.game.Game.setStatus(edu.asu.stratego.game.GameStatus.WAITING_OPP);
 
                 // Send initial piece positions to server.
-                SetupBoard initial = new SetupBoard();
+                edu.asu.stratego.game.SetupBoard initial = new edu.asu.stratego.game.SetupBoard();
                 initial.getPiecePositions();
                 toServer.writeObject(initial);
 
                 // Receive opponent's initial piece positions from server.
-                final SetupBoard opponentInitial = (SetupBoard) fromServer.readObject();
+                final edu.asu.stratego.game.SetupBoard opponentInitial = (edu.asu.stratego.game.SetupBoard) fromServer.readObject();
 
                 // Place the opponent's pieces on the board.
                 Platform.runLater(() -> {
                     for (int row = 0; row < 4; ++row) {
                         for (int col = 0; col < 10; ++col) {
-                            ClientSquare square = Game.getBoard().getSquare(row, col);
+                            ClientSquare square = edu.asu.stratego.game.Game.getBoard().getSquare(row, col);
                             square.setPiece(opponentInitial.getPiece(row, col));
 
-                            if (Game.getPlayer().getColor() == PieceColor.RED)
+                            if (edu.asu.stratego.game.Game.getPlayer().getColor() == edu.asu.stratego.game.PieceColor.RED)
                                 square.getPiecePane().setPiece(ImageConstants.BLUE_BACK);
                             else
                                 square.getPiecePane().setPiece(ImageConstants.RED_BACK);
@@ -181,23 +175,23 @@ public class ClientGameManager implements Runnable {
 
         // Get game status from the server
         try {
-            Game.setStatus((GameStatus) fromServer.readObject());
+            edu.asu.stratego.game.Game.setStatus((edu.asu.stratego.game.GameStatus) fromServer.readObject());
         } catch (ClassNotFoundException | IOException e1) {
             LOGGER.log(Level.WARNING, "Server not found", e1);
         }
 
 
         // Main loop (when playing)
-        while (Game.getStatus() == GameStatus.IN_PROGRESS) {
+        while (edu.asu.stratego.game.Game.getStatus() == edu.asu.stratego.game.GameStatus.IN_PROGRESS) {
             try {
                 // Get turn color from server.
-                Game.setTurn((PieceColor) fromServer.readObject());
+                edu.asu.stratego.game.Game.setTurn((edu.asu.stratego.game.PieceColor) fromServer.readObject());
 
                 // If the turn is the client's, set move status to none selected
-                if (Game.getPlayer().getColor() == Game.getTurn())
-                    Game.setMoveStatus(MoveStatus.NONE_SELECTED);
+                if (edu.asu.stratego.game.Game.getPlayer().getColor() == edu.asu.stratego.game.Game.getTurn())
+                    edu.asu.stratego.game.Game.setMoveStatus(edu.asu.stratego.game.MoveStatus.NONE_SELECTED);
                 else
-                    Game.setMoveStatus(MoveStatus.OPP_TURN);
+                    edu.asu.stratego.game.Game.setMoveStatus(edu.asu.stratego.game.MoveStatus.OPP_TURN);
 
                 // Notify turn indicator.
                 synchronized (BoardTurnIndicator.getTurnIndicatorTrigger()) {
@@ -205,43 +199,43 @@ public class ClientGameManager implements Runnable {
                 }
 
                 // Send move to the server.
-                if (Game.getPlayer().getColor() == Game.getTurn() && Game.getMoveStatus() != MoveStatus.SERVER_VALIDATION) {
+                if (edu.asu.stratego.game.Game.getPlayer().getColor() == edu.asu.stratego.game.Game.getTurn() && edu.asu.stratego.game.Game.getMoveStatus() != edu.asu.stratego.game.MoveStatus.SERVER_VALIDATION) {
                     synchronized (sendMove) {
                         sendMove.wait();
-                        toServer.writeObject(Game.getMove());
-                        Game.setMoveStatus(MoveStatus.SERVER_VALIDATION);
+                        toServer.writeObject(edu.asu.stratego.game.Game.getMove());
+                        edu.asu.stratego.game.Game.setMoveStatus(edu.asu.stratego.game.MoveStatus.SERVER_VALIDATION);
                     }
                 }
 
                 // Receive move from the server.
-                Game.setMove((Move) fromServer.readObject());
-                Piece startPiece = Game.getMove().getStartPiece();
-                Piece endPiece = Game.getMove().getEndPiece();
+                edu.asu.stratego.game.Game.setMove((edu.asu.stratego.game.Move) fromServer.readObject());
+                edu.asu.stratego.game.Piece startPiece = edu.asu.stratego.game.Game.getMove().getStartPiece();
+                edu.asu.stratego.game.Piece endPiece = edu.asu.stratego.game.Game.getMove().getEndPiece();
 
                 // If the move is an attack, not just a move to an unoccupied square
-                if (Game.getMove().isAttackMove()) {
+                if (edu.asu.stratego.game.Game.getMove().isAttackMove()) {
                     attackMove();
                 }
 
                 // Set the piece on the software (non-GUI) board to the updated pieces (either null or the winning piece)
-                Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y).setPiece(startPiece);
-                Game.getBoard().getSquare(Game.getMove().getEnd().x, Game.getMove().getEnd().y).setPiece(endPiece);
+                edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y).setPiece(startPiece);
+                edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getEnd().x, edu.asu.stratego.game.Game.getMove().getEnd().y).setPiece(endPiece);
 
                 // Update GUI.
                 Platform.runLater(() -> {
 
-                    ClientSquare endSquare = Game.getBoard().getSquare(Game.getMove().getEnd().x, Game.getMove().getEnd().y);
+                    ClientSquare endSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getEnd().x, edu.asu.stratego.game.Game.getMove().getEnd().y);
                     // Draw
                     if (endPiece == null)
                         endSquare.getPiecePane().setPiece(null);
                     else {
                         // If not a draw, set the end piece to the PieceType face
-                        if (endPiece.getPieceColor() == Game.getPlayer().getColor()) {
+                        if (endPiece.getPieceColor() == edu.asu.stratego.game.Game.getPlayer().getColor()) {
                             endSquare.getPiecePane().setPiece(HashTables.PIECE_MAP.get(endPiece.getPieceSpriteKey()));
                         }
                         // ...unless it is the opponent's piece which it will display the back instead
                         else {
-                            if (endPiece.getPieceColor() == PieceColor.BLUE)
+                            if (endPiece.getPieceColor() == edu.asu.stratego.game.PieceColor.BLUE)
                                 endSquare.getPiecePane().setPiece(ImageConstants.BLUE_BACK);
                             else
                                 endSquare.getPiecePane().setPiece(ImageConstants.RED_BACK);
@@ -250,27 +244,27 @@ public class ClientGameManager implements Runnable {
                 });
 
                 // If it is an attack, wait 0.05 seconds to allow the arrow to be visible
-                if (Game.getMove().isAttackMove()) {
+                if (edu.asu.stratego.game.Game.getMove().isAttackMove()) {
                     Thread.sleep(50);
                 }
 
                 Platform.runLater(() -> {
                     // Arrow
 
-                    ClientSquare arrowSquare = Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y);
+                    ClientSquare arrowSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y);
 
                     // Change the arrow to an image (and depending on what color the arrow should be)
-                    if (Game.getMove().getMoveColor() == PieceColor.RED)
+                    if (edu.asu.stratego.game.Game.getMove().getMoveColor() == edu.asu.stratego.game.PieceColor.RED)
                         arrowSquare.getPiecePane().setPiece(ImageConstants.MOVEARROW_RED);
                     else
                         arrowSquare.getPiecePane().setPiece(ImageConstants.MOVEARROW_BLUE);
 
                     // Rotate the arrow to show the direction of the move
-                    if (Game.getMove().getStart().x > Game.getMove().getEnd().x)
+                    if (edu.asu.stratego.game.Game.getMove().getStart().x > edu.asu.stratego.game.Game.getMove().getEnd().x)
                         arrowSquare.getPiecePane().getPiece().setRotate(0);
-                    else if (Game.getMove().getStart().y < Game.getMove().getEnd().y)
+                    else if (edu.asu.stratego.game.Game.getMove().getStart().y < edu.asu.stratego.game.Game.getMove().getEnd().y)
                         arrowSquare.getPiecePane().getPiece().setRotate(90);
-                    else if (Game.getMove().getStart().x < Game.getMove().getEnd().x)
+                    else if (edu.asu.stratego.game.Game.getMove().getStart().x < edu.asu.stratego.game.Game.getMove().getEnd().x)
                         arrowSquare.getPiecePane().getPiece().setRotate(180);
                     else
                         arrowSquare.getPiecePane().getPiece().setRotate(270);
@@ -289,7 +283,7 @@ public class ClientGameManager implements Runnable {
                 }
 
                 // Get game status from server.
-                Game.setStatus((GameStatus) fromServer.readObject());
+                edu.asu.stratego.game.Game.setStatus((edu.asu.stratego.game.GameStatus) fromServer.readObject());
             } catch (ClassNotFoundException | IOException | InterruptedException e) {
                 LOGGER.log(Level.WARNING, "Interrupted Connection", e);
                 Thread.currentThread().interrupt();
@@ -299,23 +293,33 @@ public class ClientGameManager implements Runnable {
     }
 
     private void attackMove() throws InterruptedException {
-        Piece attackingPiece = Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y).getPiece();
-        if (attackingPiece.getPieceType() == PieceType.SCOUT) {
+        edu.asu.stratego.game.Piece attackingPiece = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y).getPiece();
+        if (attackingPiece.getPieceType() == edu.asu.stratego.game.PieceType.SCOUT) {
             // Check if the scout is attacking over more than one square
-            int moveX = Game.getMove().getStart().x - Game.getMove().getEnd().x;
-            int moveY = Game.getMove().getStart().y - Game.getMove().getEnd().y;
+            int moveX = edu.asu.stratego.game.Game.getMove().getStart().x - edu.asu.stratego.game.Game.getMove().getEnd().x;
+            int moveY = edu.asu.stratego.game.Game.getMove().getStart().y - edu.asu.stratego.game.Game.getMove().getEnd().y;
 
             if (Math.abs(moveX) > 1 || Math.abs(moveY) > 1) {
                 Platform.runLater(() -> {
                     try {
                         int shiftX = 0;
                         int shiftY = 0;
-                       move(moveX,moveY);
+
+                        if (moveX > 0) {
+                            shiftX = 1;
+                        } else if (moveX < 0) {
+                            shiftX = -1;
+                        } else if (moveY > 0) {
+                            shiftY = 1;
+                        } else if (moveY < 0) {
+                            shiftY = -1;
+                        }
 
                         // Move the scout in front of the piece it's attacking before actually fading out
-                        ClientSquare scoutSquare = Game.getBoard().getSquare(Game.getMove().getEnd().x + shiftX, Game.getMove().getEnd().y + shiftY);
+                        ClientSquare scoutSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getEnd().x + shiftX, edu.asu.stratego.game.Game.getMove().getEnd().y + shiftY);
+                        ClientSquare startSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y);
                         scoutSquare.getPiecePane().setPiece(HashTables.PIECE_MAP.get(scoutSquare.getPiece().getPieceSpriteKey()));
-                        scoutSquare.getPiecePane().setPiece(null);
+                        startSquare.getPiecePane().setPiece(null);
                     } catch (Exception e) {
                         LOGGER.log(Level.WARNING, "Movement not allowed", e);
                     }
@@ -324,27 +328,37 @@ public class ClientGameManager implements Runnable {
                 // Wait 1 second after moving the scout in front of the piece it's going to attack
                 Thread.sleep(1000);
 
-                ClientSquare startSquare = Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y);
                 int shiftX = 0;
                 int shiftY = 0;
-                move(moveX, moveY);
+
+                if (moveX > 0) {
+                    shiftX = 1;
+                } else if (moveX < 0) {
+                    shiftX = -1;
+                } else if (moveY > 0) {
+                    shiftY = 1;
+                } else if (moveY < 0) {
+                    shiftY = -1;
+                }
+
+                ClientSquare startSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y);
 
                 // Fix the clientside software boards (and move) to reflect new scout location, now attacks like a normal piece
-                Game.getBoard().getSquare(Game.getMove().getEnd().x + shiftX, Game.getMove().getEnd().y + shiftY).setPiece(startSquare.getPiece());
-                Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y).setPiece(null);
+                edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getEnd().x + shiftX, edu.asu.stratego.game.Game.getMove().getEnd().y + shiftY).setPiece(startSquare.getPiece());
+                edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y).setPiece(null);
 
-                Game.getMove().setStart(Game.getMove().getEnd().x + shiftX, Game.getMove().getEnd().y + shiftY);
+                edu.asu.stratego.game.Game.getMove().setStart(edu.asu.stratego.game.Game.getMove().getEnd().x + shiftX, edu.asu.stratego.game.Game.getMove().getEnd().y + shiftY);
             }
         }
         Platform.runLater(() -> {
             try {
                 // Set the face images visible to both players (from the back that doesn't show piecetype)
 
-                ClientSquare startSquare = Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y);
-                ClientSquare endSquare = Game.getBoard().getSquare(Game.getMove().getEnd().x, Game.getMove().getEnd().y);
+                ClientSquare startSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y);
+                ClientSquare endSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getEnd().x, edu.asu.stratego.game.Game.getMove().getEnd().y);
 
-                Piece animStartPiece = startSquare.getPiece();
-                Piece animEndPiece = endSquare.getPiece();
+                edu.asu.stratego.game.Piece animStartPiece = startSquare.getPiece();
+                edu.asu.stratego.game.Piece animEndPiece = endSquare.getPiece();
 
                 startSquare.getPiecePane().setPiece(HashTables.PIECE_MAP.get(animStartPiece.getPieceSpriteKey()));
                 endSquare.getPiecePane().setPiece(HashTables.PIECE_MAP.get(animEndPiece.getPieceSpriteKey()));
@@ -360,14 +374,14 @@ public class ClientGameManager implements Runnable {
         Platform.runLater(() -> {
             try {
 
-                ClientSquare startSquare = Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y);
-                ClientSquare endSquare = Game.getBoard().getSquare(Game.getMove().getEnd().x, Game.getMove().getEnd().y);
+                ClientSquare startSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y);
+                ClientSquare endSquare = edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getEnd().x, edu.asu.stratego.game.Game.getMove().getEnd().y);
 
                 // If the piece dies, fade it out (also considers a draw, where both "win" are set to false)
-                if (!Game.getMove().isAttackWin()) {
+                if (!edu.asu.stratego.game.Game.getMove().isAttackWin()) {
                     winnerMove(startSquare);
                 }
-                if (!Game.getMove().isDefendWin()) {
+                if (!edu.asu.stratego.game.Game.getMove().isDefendWin()) {
                     winnerMove(endSquare);
                 }
             } catch (Exception e) {
@@ -397,8 +411,8 @@ public class ClientGameManager implements Runnable {
         Platform.runLater(() -> {
             for (int row = 0; row < 10; row++) {
                 for (int col = 0; col < 10; col++) {
-                    if (Game.getBoard().getSquare(row, col).getPiece() != null && Game.getBoard().getSquare(row, col).getPiece().getPieceColor() != Game.getPlayer().getColor()) {
-                        Game.getBoard().getSquare(row, col).getPiecePane().setPiece(HashTables.PIECE_MAP.get(Game.getBoard().getSquare(row, col).getPiece().getPieceSpriteKey()));
+                    if (edu.asu.stratego.game.Game.getBoard().getSquare(row, col).getPiece() != null && edu.asu.stratego.game.Game.getBoard().getSquare(row, col).getPiece().getPieceColor() != edu.asu.stratego.game.Game.getPlayer().getColor()) {
+                        edu.asu.stratego.game.Game.getBoard().getSquare(row, col).getPiecePane().setPiece(HashTables.PIECE_MAP.get(edu.asu.stratego.game.Game.getBoard().getSquare(row, col).getPiece().getPieceSpriteKey()));
                     }
                 }
             }
@@ -430,31 +444,12 @@ public class ClientGameManager implements Runnable {
     }
 
     private void startEnd (){
-        Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y).getPiecePane().getPiece().setOpacity(1.0);
-        Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y).getPiecePane().getPiece().setRotate(0.0);
-        Game.getBoard().getSquare(Game.getMove().getStart().x, Game.getMove().getStart().y).getPiecePane().setPiece(null);
+        edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y).getPiecePane().getPiece().setOpacity(1.0);
+        edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y).getPiecePane().getPiece().setRotate(0.0);
+        edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getStart().x, edu.asu.stratego.game.Game.getMove().getStart().y).getPiecePane().setPiece(null);
 
-        Game.getBoard().getSquare(Game.getMove().getEnd().x, Game.getMove().getEnd().y).getPiecePane().getPiece().setOpacity(1.0);
-        Game.getBoard().getSquare(Game.getMove().getEnd().x, Game.getMove().getEnd().y).getPiecePane().getPiece().setRotate(0.0);
+        edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getEnd().x, edu.asu.stratego.game.Game.getMove().getEnd().y).getPiecePane().getPiece().setOpacity(1.0);
+        edu.asu.stratego.game.Game.getBoard().getSquare(edu.asu.stratego.game.Game.getMove().getEnd().x, edu.asu.stratego.game.Game.getMove().getEnd().y).getPiecePane().getPiece().setRotate(0.0);
     }
-
-    private void move (int x, int y){
-        int shiftX = 0;
-        int shiftY = 0;
-        if (x > 0) {
-            shiftX = 1;
-        } else if (x < 0) {
-            shiftX = -1;
-        } else if (y > 0) {
-            shiftY = 1;
-        } else if (y < 0) {
-            shiftY = -1;
-        }
-    }
-
-
-
-
-
 
 }

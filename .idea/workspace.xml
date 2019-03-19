@@ -1,15 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66edaa97-4769-48db-86fe-c6eb284e7d09" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/19E07_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="9e20cd5b-b110-4593-b9f7-adee28f92b4e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/client_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/asu/stratego/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/ClientGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/asu/stratego/game/ClientGameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/BattleOutcome.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/ClientGameManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/ClientSocket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/GameStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/Move.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/MoveStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/Piece.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/PieceColor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/PieceType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/ServerGameManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/SetupBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/board/ClientBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/board/ClientSquare.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/board/ServerBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/game/board/ServerSquare.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/BoardScene.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/ClientStage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/ConnectionScene.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/WaitingScene.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/AttackPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/BoardEventPane.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/BoardPane.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/BoardSquareEventPane.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/BoardSquarePane.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/BoardSquarePane.java~HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/BoardSquareType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/BoardTurnIndicator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/setup/SetupPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/setup/SetupPieces.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/gui/board/setup/SetupTimer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/ImageConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/PlaySound.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/SoundConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/border.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/grass1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/grass2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/highlight_invalid.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/highlight_none.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/highlight_valid.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/highlight_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/lake1_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/lake1_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/lake1_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/lake1_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/lake2_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/lake2_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/lake2_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/lake2_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/movearrow_blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/movearrow_red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/ready_hover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/ready_idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/setup_panel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/board/stratego_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_bomb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/blue/blue_spy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_bomb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/images/pieces/red/red_spy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/media/sound/cornfield.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/util/HashTables.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/asu/stratego/util/MutableBoolean.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,19 +108,24 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/asu/stratego/Server.java">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+            <state relative-caret-position="187">
+              <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/edu/asu/stratego/game/ClientGameManager.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/asu/stratego/game/ClientGameManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="442" column="8" selection-start-line="442" selection-start-column="8" selection-end-line="442" selection-end-column="8" />
+            <state relative-caret-position="5576">
+              <caret line="413" column="87" selection-start-line="413" selection-start-column="87" selection-end-line="413" selection-end-column="87" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#19682#19683#0" expanded="true" />
+                <element signature="e#19713#19714#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -44,65 +138,89 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/edu/asu/stratego/Server.java" />
-        <option value="$PROJECT_DIR$/src/edu/asu/stratego/game/ClientGameManager.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/asu/stratego/game/ClientGameManager.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="67" />
-    <option name="y" value="27" />
-    <option name="width" value="927" />
-    <option name="height" value="1053" />
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="19E07" type="b2602c69:ProjectViewProjectNode" />
-              <item name="19E07" type="462c0819:PsiDirectoryNode" />
+              <item name="Sonar" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sonar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="19E07" type="b2602c69:ProjectViewProjectNode" />
-              <item name="19E07" type="462c0819:PsiDirectoryNode" />
+              <item name="Sonar" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sonar" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="19E07" type="b2602c69:ProjectViewProjectNode" />
-              <item name="19E07" type="462c0819:PsiDirectoryNode" />
+              <item name="Sonar" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sonar" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Sonar" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sonar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Sonar" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sonar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="stratego" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="19E07" type="b2602c69:ProjectViewProjectNode" />
-              <item name="19E07" type="462c0819:PsiDirectoryNode" />
+              <item name="Sonar" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sonar" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="stratego" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552985980359" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/META-INF" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552988554697" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../19E07" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -116,45 +234,25 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.asu.stratego.Server" />
-      <module name="19E07" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.asu.stratego.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Server" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="66edaa97-4769-48db-86fe-c6eb284e7d09" name="Default Changelist" comment="" />
-      <created>1552905537056</created>
+      <changelist id="9e20cd5b-b110-4593-b9f7-adee28f92b4e" name="Default Changelist" comment="" />
+      <created>1552988221469</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1552905537056</updated>
-      <workItem from="1552905539088" duration="2563000" />
+      <updated>1552988221469</updated>
+      <workItem from="1552988222963" duration="334000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2563000" />
+    <option name="totallyTimeSpent" value="334000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Designer" />
@@ -163,18 +261,18 @@
       <window_info id="UI Designer" />
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Learn" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24962178" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.120272316" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Messages" weight="0.3289689" />
       <window_info anchor="bottom" id="SonarLint" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -194,17 +292,29 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/edu/asu/stratego/Server.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+        <state relative-caret-position="187">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/asu/stratego/game/ClientGameManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/asu/stratego/gui/ConnectionScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="442" column="8" selection-start-line="442" selection-start-column="8" selection-end-line="442" selection-end-column="8" />
+        <state relative-caret-position="128">
+          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/asu/stratego/game/ClientGameManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5576">
+          <caret line="413" column="87" selection-start-line="413" selection-start-column="87" selection-end-line="413" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#19682#19683#0" expanded="true" />
+            <element signature="e#19713#19714#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -214,12 +324,10 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>client:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -262,7 +370,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>19E07</last-edited>
+          <last-edited>Sonar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
